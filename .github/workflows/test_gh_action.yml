@@ -11,7 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Validating PR commits
+        # replace main by the branch you want to test
         uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@main
         env:
           GitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          ValidationSettingsPath: ./cicdSettings/prCommitValidationSettings.json
+          ValidationSettingsPath: ./cicd/prCommitValidationSettings.json

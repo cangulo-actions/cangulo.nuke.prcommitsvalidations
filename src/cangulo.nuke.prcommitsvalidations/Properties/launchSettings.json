@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "cangulo.nuke.prcommitsvalidations": {
-      "commandName": "Project",
-      "commandLineArgs": "-ValidationSettingsPath ./prCommitValidationSettings.json",
-      "workingDirectory": "C:\\repos\\cangulo.nuke.prcommitsvalidations"
-    }
-  }
-}

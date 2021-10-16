@@ -8,16 +8,12 @@ LABEL \
     org.opencontainers.image.title="PR Commits Validator"                                                                               \
     org.opencontainers.image.description="Docker image to execute the project cangulo.nuke.prcommitsvalidations as a GitHub action."    \
     org.opencontainers.image.source="https://github.com/cangulo-actions/cangulo.nuke.prcommitsvalidations" \
-    org.opencontainers.image.url="https://hub.docker.com/r/cangulomascarell/nuke.prcommitsvalidations"     \
+    org.opencontainers.image.url="https://github.com/marketplace/actions/cangulo-nuke-prcommitsvalidations"     \
     org.opencontainers.image.documentation="https://github.com/cangulo-actions/cangulo.nuke.prcommitsvalidations"    \
     org.opencontainers.image.authors="@cangulo"
 
 # source doce https://github.com/cangulo/cangulo.nuke.prcommitsvalidations
 
-RUN echo "####  workspace $GITHUB_WORKSPACE"
+COPY /app /app
 
-COPY ./app ./app
-WORKDIR ./app
-RUN echo "####  list files copied";ls
-
-ENTRYPOINT ["dotnet", "cangulo.nuke.prcommitsvalidations.dll"]
+ENTRYPOINT ["dotnet", "/app/cangulo.nuke.prcommitsvalidations.dll","--root","."]
