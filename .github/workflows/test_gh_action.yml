@@ -1,6 +1,8 @@
 name: GH Action cangulo.nuke.prcommitsvalidations
 
-on: [push]
+on:
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   validate-conventional-commits:
@@ -12,3 +14,4 @@ jobs:
         uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@main
         env:
           GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          ValidationSettingsPath: ./cicdSettings/prCommitValidationSettings.json
