@@ -1,5 +1,6 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /source
+# Container image that runs your code
+ARG REPO=mcr.microsoft.com/dotnet/runtime-deps
+FROM $REPO:5.0.11-alpine3.14-amd64
 
 # better to add the dynamic labels as 
 #   * org.opencontainers.image.created
@@ -15,16 +16,13 @@ LABEL \
 
 # source doce https://github.com/cangulo/cangulo.nuke.prcommitsvalidations
 
-COPY /src/cangulo.nuke.prcommitsvalidations ./src/cangulo.nuke.prcommitsvalidations
-COPY /cangulo.nuke.prcommitsvalidations.sln .
+COPY entrypoint.sh /entrypoint.sh
+COPY cangulo.nuke.prcommitsvalidations /prValidator
 
-RUN dotnet restore
+WORKDIR /prValidator
 
-RUN dotnet publish -c release -o /app --no-restore
-RUN echo "####  list published files";ls /app
+RUN echo "listing files in prValidator"; ls
 
-FROM mcr.microsoft.com/dotnet/runtime:5.0
-WORKDIR /app
-COPY --from=build /app .
-RUN echo "####  list files to run";ls
-ENTRYPOINT ["dotnet", "cangulo.nuke.prcommitsvalidations.dll", "--root","."]
+# Code file to execute when the docker container starts up (`entrypoint.sh`)
+ENTRYPOINT ["/entrypoint.sh"]
+

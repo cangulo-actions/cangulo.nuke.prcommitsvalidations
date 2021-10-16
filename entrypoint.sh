@@ -18,6 +18,6 @@ ls
 echo "::endgroup::"
 
 # echo "::group::executing pr validation"
-./prValidator/cangulo.nuke.prcommitsvalidations ValidatePRCommits --root .
+cangulo.nuke.prcommitsvalidations ValidatePRCommits --root .
 
 # echo "::endgroup::"
