@@ -2,7 +2,7 @@
 
 # Docker commands
 
-version="0.0.1-beta"
+version="0.0.2-beta"
 name="nuke.prcommitsvalidations"
 repo="cangulomascarell/$name"
 id="$repo:$version"

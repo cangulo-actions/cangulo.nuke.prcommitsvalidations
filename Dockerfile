@@ -1,5 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /source
+FROM mcr.microsoft.com/dotnet/runtime:5.0
 
 # better to add the dynamic labels as 
 #   * org.opencontainers.image.created
@@ -15,16 +14,10 @@ LABEL \
 
 # source doce https://github.com/cangulo/cangulo.nuke.prcommitsvalidations
 
-COPY /src/cangulo.nuke.prcommitsvalidations ./src/cangulo.nuke.prcommitsvalidations
-COPY /cangulo.nuke.prcommitsvalidations.sln .
+RUN echo "####  workspace $GITHUB_WORKSPACE"
 
-RUN dotnet restore
+COPY ./app ./app
+WORKDIR ./app
+RUN echo "####  list files copied";ls
 
-RUN dotnet publish -c release -o /app --no-restore
-RUN echo "####  list published files";ls /app
-
-FROM mcr.microsoft.com/dotnet/runtime:5.0
-WORKDIR /app
-COPY --from=build /app .
-RUN echo "####  list files to run";ls
-ENTRYPOINT ["dotnet", "cangulo.nuke.prcommitsvalidations.dll", "--root","."]
+ENTRYPOINT ["dotnet", "cangulo.nuke.prcommitsvalidations.dll"]
