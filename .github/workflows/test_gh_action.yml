@@ -10,9 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Validating PR commits
-        # replace main by the branch you want to test
-        uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@main
+      - name: Validating PR commits Using current executable files
         env:
           GitHubToken: ${{ secrets.GITHUB_TOKEN }}
           ValidationSettingsPath: ./cicd/prCommitValidationSettings.json
+        run: ./app/cangulo.nuke.prcommitsvalidations.dll
+
+      # - name: Validating PR commits Using current version
+      #   # replace main by the branch you want to test
+      #   # uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@main
+      #   env:
+      #     GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      #     ValidationSettingsPath: ./cicd/prCommitValidationSettings.json
