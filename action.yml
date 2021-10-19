@@ -3,6 +3,20 @@ description: "Validate Commits in a PR"
 branding:
   icon: book-open
   color: orange
+inputs:
+  githubToken:  
+    description: 'Github Token'
+    required: true
+  validationSettingsPath:  
+    description: 'settings to the json file with the conventional commits model'
+    required: true
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: "composite"
+  steps:
+    - id: commits-validation
+      name: Validating pr commits
+      env:
+        GitHubToken: ${{ inputs.githubToken }}
+        ValidationSettingsPath: ${{ inputs.validationSettingsPath }}
+      run: ./app/cangulo.nuke.prcommitsvalidations --root .
+      shell: bash
