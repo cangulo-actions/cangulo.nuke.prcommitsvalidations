@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Validating PR commits Using executable files
-        env:
-          GitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          ValidationSettingsPath: ./cicd/prCommitValidationSettings.json
-        run: ./app/cangulo.nuke.prcommitsvalidations --root .
+      # - name: Validating PR commits Using executable files
+      #   env:
+      #     GitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      #     ValidationSettingsPath: ./cicd/prCommitValidationSettings.json
+      #   run: ./app/cangulo.nuke.prcommitsvalidations --root .
 
       - name: Validating PR commits Using candidate version
         uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@release/0.0.0
