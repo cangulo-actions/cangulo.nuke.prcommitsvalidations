@@ -1,8 +1,10 @@
 name: Test GH Action
 
 on:
+  workflow_dispatch:
   pull_request:
     types: [opened, synchronize]
+
 
 jobs:
   validate-conventional-commits:
@@ -16,8 +18,8 @@ jobs:
           ValidationSettingsPath: ./cicd/prCommitValidationSettings.json
         run: ./app/cangulo.nuke.prcommitsvalidations --root .
 
-      # - name: Validating PR commits Using candidate version
-      #   uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@release/0.0.1
-      #   with:
-      #     githubToken: ${{ secrets.GITHUB_TOKEN }}
-      #     validationSettingsPath: ./cicd/prCommitValidationSettings.json
+      - name: Validating PR commits Using candidate version
+        uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@release/0.0.1
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          validationSettingsPath: ./cicd/prCommitValidationSettings.json
