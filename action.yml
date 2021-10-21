@@ -4,7 +4,6 @@ branding:
   icon: book-open
   color: orange
 
-# The input parameters are set as env variable and will be consumed by NUKE
 inputs:
   githubToken:
     description: "Github Token"
@@ -13,11 +12,13 @@ inputs:
     description: "settings to the json file with the conventional commits model"
     required: true
 
-
 runs:
   using: "composite"
   steps:
     - id: commits-validation
-      name: Validating pr commits
-      run: ${{ github.action_path }}/app/cangulo.nuke.prcommitsvalidations --root .
+      name: Validating PR commits
+      env:
+        githubToken: ${{ inputs.githubToken }}
+        validationSettingsPath: ${{ inputs.validationSettingsPath }}
+      run: ./app/cangulo.nuke.prcommitsvalidations --root .
       shell: bash
