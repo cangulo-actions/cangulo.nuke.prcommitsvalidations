@@ -16,7 +16,9 @@ jobs:
         env:
           GitHubToken: ${{ secrets.GITHUB_TOKEN }}
           ValidationSettingsPath: ./cicd/prCommitValidationSettings.json
+          PullRequestNumber: ${{ github.event.number }}
         run: ./app/cangulo.nuke.prcommitsvalidations --root .
+
   test-gh-action-directly:
     name: Testing Release Candidate
     runs-on: ubuntu-latest
