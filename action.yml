@@ -20,5 +20,5 @@ runs:
       env:
         githubToken: ${{ inputs.githubToken }}
         validationSettingsPath: ${{ inputs.validationSettingsPath }}
-      run: ./app/cangulo.nuke.prcommitsvalidations --root .
+      run: ${{ github.action_path }}/app/cangulo.nuke.prcommitsvalidations --root .
       shell: bash
