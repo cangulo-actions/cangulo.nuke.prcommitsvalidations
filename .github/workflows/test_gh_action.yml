@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Validating PR commits Using candidate version
-        uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@release/0.0.1
+        uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@release/0.0.2
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           validationSettingsPath: ./cicd/prCommitValidationSettings.json
