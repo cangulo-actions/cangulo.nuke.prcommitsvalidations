@@ -1,14 +1,29 @@
 # Example 
 
 ```yml
-- name: Validating PR commits
-  uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@v0.0.1
-  with:
-    validationSettingsPath: ./cicd/prCommitValidationSettings.json
+name: Validating Conventional Commits
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize]
+
+
+jobs:
+  validate-conventional-commits:
+    name: Validating Conventional Commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validating PR commits
+        uses: cangulo-actions/cangulo.nuke.prcommitsvalidations@v0.0.1
+        with:
+          validationSettingsPath: ./cicd/prCommitValidationSettings.json
 ```
 
-Please provide the next parameters:
-* **validationSettingsPath** -> path to the json file with the conventional commits accepted. Next is an example:
+## Requirement
+
+Define the conventional commits in a json file as next:
 
 ```json
 {
@@ -20,6 +35,9 @@ Please provide the next parameters:
     ]
 }
 ```
+
+Then, provide it in the parameter validationSettingsPath.
+
 # Remarks
 
 * Only use this GH action with a PR event. This is because solution depends on the PR number provided in the `${{ github.event.number }}` parameter. 
