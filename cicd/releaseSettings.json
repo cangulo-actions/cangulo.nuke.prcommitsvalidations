@@ -48,7 +48,7 @@
         }
     },
     "gitPushReleaseFilesSettings": {
-        "email": "carlos.angulo.mascarell@outlook.com",
-        "name": "cangulo.nuke.releasecreator"
+        "email": "cangulo_gh_action@github.com",
+        "name": "cangulo_gh_action"
     }
 }
